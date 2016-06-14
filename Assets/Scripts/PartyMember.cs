@@ -58,10 +58,4 @@ public class PartyMember : MonoBehaviour {
             }
         }
     }
-
-    void OnCollisionEnter(Collision col) {
-        if (col.collider.tag == "Enemy") {
-            GetComponent<Damageable>().Health -= 5f;
-        }
-    }
 }

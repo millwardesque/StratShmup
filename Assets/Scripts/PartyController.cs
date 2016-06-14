@@ -87,7 +87,6 @@ public class PartyController : MonoBehaviour {
         int j = 0;
         for (int i = 0; i < m_partyMembers.Length; ++i) {
             if (m_partyMembers[i] != null && m_partyMembers[i] != deadMember) {
-                Debug.Log ("Re-adding " + m_partyMembers [i]);
                 newPartyMembers [j] = m_partyMembers [i];
                 j++;
             }
