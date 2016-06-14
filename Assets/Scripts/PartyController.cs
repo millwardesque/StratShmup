@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PartyController : MonoBehaviour {
     PartyMember[] m_partyMembers;
@@ -79,5 +80,25 @@ public class PartyController : MonoBehaviour {
         }
 
         return slots;
+    }
+
+    public void OnPartyMemberDead(PartyMember deadMember) {
+        PartyMember[] newPartyMembers = new PartyMember[m_partyMembers.Length - 1];
+        int j = 0;
+        for (int i = 0; i < m_partyMembers.Length; ++i) {
+            if (m_partyMembers[i] != null && m_partyMembers[i] != deadMember) {
+                Debug.Log ("Re-adding " + m_partyMembers [i]);
+                newPartyMembers [j] = m_partyMembers [i];
+                j++;
+            }
+        }
+
+        if (0 == newPartyMembers.Length) {
+            Debug.Log ("GAME OVER!!!!");
+            SceneManager.LoadScene ("Sandbox", LoadSceneMode.Single);
+        }
+        else {
+            m_partyMembers = newPartyMembers;
+        }
     }
 }

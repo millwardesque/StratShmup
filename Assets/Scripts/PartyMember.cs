@@ -37,6 +37,16 @@ public class PartyMember : MonoBehaviour {
         m_rigidbody = GetComponent<Rigidbody> ();
     }
 
+
+    void Start () {
+        GetComponent<Damageable> ().onDead = OnDead;
+    }
+
+    void OnDead() {
+        FindObjectOfType<PartyController> ().OnPartyMemberDead (this);
+        GameObject.Destroy (gameObject);
+    }
+
     void FixedUpdate() {
         if (State == PartyMemberState.Walking) {
             Vector3 targetVector = m_movementTarget - transform.position;
@@ -51,7 +61,7 @@ public class PartyMember : MonoBehaviour {
 
     void OnCollisionEnter(Collision col) {
         if (col.collider.tag == "Enemy") {
-            col.collider.GetComponent<Damageable>().Health -= 5f;
+            GetComponent<Damageable>().Health -= 5f;
         }
     }
 }

@@ -406,24 +406,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2096712, guid: e8a318b93f44649b5b059cf9832d1761, type: 2}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096712, guid: e8a318b93f44649b5b059cf9832d1761, type: 2}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8a318b93f44649b5b059cf9832d1761, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1729540063 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 173604, guid: b1921b82147694df9be124aa98840ae7, type: 2}
-  m_PrefabInternal: {fileID: 878221206}
---- !u!114 &1729540064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729540063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f65716c34df469e97c85a67aa57076, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1786424546
 Prefab:
   m_ObjectHideFlags: 0
@@ -493,7 +486,7 @@ GameObject:
   - 114: {fileID: 2070865679}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
