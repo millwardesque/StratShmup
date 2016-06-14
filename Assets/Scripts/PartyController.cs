@@ -9,7 +9,6 @@ public class PartyController : MonoBehaviour {
 
     void Awake() {
         m_partyMembers = GetComponentsInChildren<PartyMember> ();
-        Debug.Log ("Found " + m_partyMembers.Length + " party member(s)");
     }
         
 	void Start () {

@@ -14,7 +14,7 @@ GameObject:
   - 81: {fileID: 8184732}
   - 114: {fileID: 11464066}
   - 54: {fileID: 5400018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Autoscroll Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

@@ -325,6 +325,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1001 &878221206
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483634, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1608983543
 Prefab:
   m_ObjectHideFlags: 0
@@ -364,13 +406,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11464066, guid: e8a318b93f44649b5b059cf9832d1761, type: 2}
-      propertyPath: scrollVelocity.x
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8a318b93f44649b5b059cf9832d1761, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1729540063 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 173604, guid: b1921b82147694df9be124aa98840ae7, type: 2}
+  m_PrefabInternal: {fileID: 878221206}
+--- !u!114 &1729540064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729540063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f65716c34df469e97c85a67aa57076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1786424546
 Prefab:
   m_ObjectHideFlags: 0
