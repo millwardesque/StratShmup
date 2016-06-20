@@ -6,6 +6,10 @@ public class PartyController : MonoBehaviour {
     PartyMember[] m_partyMembers;
     Camera m_camera;
 
+    private PartyMember m_selectedMember;
+       
+    private Material m_savedMaterial;
+    public Material selectedMaterial;
     public float formationDistance = 1f;
 
     void Awake() {
@@ -18,23 +22,53 @@ public class PartyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (Input.GetMouseButton (0)) {
+        if (Input.GetMouseButtonDown (0)) {
             Ray clickRay = m_camera.ScreenPointToRay (Input.mousePosition);
             RaycastHit[] hits;
 
-            // @TODO Run this against just the ground layer once docs are available and I'm off the plane...
+            hits = Physics.RaycastAll (clickRay);
+            for (int i = 0; i < hits.Length; ++i) {
+                if (hits [i].collider.tag == "Player Party" && hits [i].collider.GetComponent<PartyMember> () != null) {
+                    SelectPartyMember (hits [i].collider.GetComponent<PartyMember> ());
+                    break;
+                }
+            }
+        }
+        else if (Input.GetMouseButton (0)) {
+            Ray clickRay = m_camera.ScreenPointToRay (Input.mousePosition);
+            RaycastHit[] hits;
+
             hits = Physics.RaycastAll (clickRay);
             for (int i = 0; i < hits.Length; ++i) {
                 if (hits [i].collider.tag == "Ground") {
                     Vector3 newPosition = hits [i].point;
 
                     m_partyMembers [0].MovementTarget = new Vector3 (newPosition.x, m_partyMembers[0].transform.position.y, newPosition.z);
+                    break;
                 }
             }
         }
 
         KeepInFormation ();
 	}
+
+    void SelectPartyMember(PartyMember member) {
+        if (m_selectedMember == member) {
+            DeselectPartyMember ();
+        } else {
+            if (m_selectedMember != null) {
+                DeselectPartyMember ();
+            }
+            m_savedMaterial = member.GetComponentInChildren<Renderer> ().material;
+            m_selectedMember = member;
+            m_selectedMember.GetComponentInChildren<Renderer>().material = selectedMaterial;
+        }
+    }
+
+    void DeselectPartyMember() {
+        m_selectedMember.GetComponentInChildren<Renderer>().material = m_savedMaterial;
+        m_selectedMember = null;
+    }
 
     void KeepInFormation() {
         PartyMember leader = m_partyMembers [0];

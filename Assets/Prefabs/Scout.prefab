@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11409316}
   - 114: {fileID: 11446228}
   m_Layer: 9
-  m_Name: Soldier
+  m_Name: Scout
   m_TagString: Player Party
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c5fc63e4b875041a8817285b81cfc04b, type: 2}
+  - {fileID: 2100000, guid: be68b0a70801a4d468f0b83048159f76, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

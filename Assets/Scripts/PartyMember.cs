@@ -22,6 +22,8 @@ public class PartyMember : MonoBehaviour {
     }
     public float maxSpeed = 1f;
 
+    public int meleeStrength = 1;
+
     Vector3 m_movementTarget;
     public Vector3 MovementTarget {
         get { return m_movementTarget; }
@@ -56,6 +58,12 @@ public class PartyMember : MonoBehaviour {
             } else {
                 State = PartyMemberState.Idle;
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision col) {
+        if (col.collider.tag == "Enemy") {
+            col.collider.GetComponent<Damageable>().Health -= meleeStrength;
         }
     }
 }

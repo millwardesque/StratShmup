@@ -5,12 +5,13 @@ public delegate void OnDeadCallback();
 
 public class Damageable : MonoBehaviour {
     float m_health;
+    bool m_isDead = false;
     public float Health {
         get { return m_health; }
         set {
             m_health = value;
 
-            if (m_health < 0f) {
+            if (m_health < 0f && !m_isDead) {
                 Dead ();
             }
         }
@@ -26,6 +27,7 @@ public class Damageable : MonoBehaviour {
 
     void Dead() {
         Debug.Log (name + " is dead.");
+        m_isDead = true;
         if (onDead != null) {
             onDead ();
         }

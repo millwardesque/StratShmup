@@ -12,10 +12,4 @@ public class Enemy : MonoBehaviour {
     void OnDead() {
         GameObject.Destroy (gameObject);
     }
-
-    void OnCollisionEnter(Collision col) {
-        if (col.collider.tag == "Player Party") {
-            GetComponent<Damageable>().Health -= meleeStrength;
-        }
-    }
 }

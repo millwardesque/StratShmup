@@ -19,6 +19,8 @@ public class PatrollingEnemy : Enemy {
         Vector3 direction = (endPoint - transform.position).normalized;
         m_rigidbody.velocity = direction * patrolSpeed;
         m_isMovingToEnd = true;
+
+        GetComponent<Damageable> ().onDead = OnDead;
 	}
 	
 	// Update is called once per frame
@@ -38,4 +40,8 @@ public class PatrollingEnemy : Enemy {
             }
         }
 	}
+
+    void OnDead() {
+        GameObject.Destroy (gameObject);
+    }
 }
