@@ -1,29 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ScoutState {
-    Normal,
-    TrackingEnemy
-};
-public class Scout : PartyMember {
-    Enemy m_target;
-
-    ScoutState m_subState;
-    public ScoutState SubState {
-        get { return m_subState; }
-        set {
-            m_subState = value;
-
-            if (m_subState == ScoutState.Normal) {
-                m_target = null;
-                State = PartyMemberState.Idle;
-            }
-            else if (m_subState == ScoutState.TrackingEnemy) {
-                OnUpdate = OnTrackingEnemy;
-            }
+public class ScoutTrackingEnemyState : PartyMemberState {
+    Enemy m_enemy;
+    public Enemy TrackedEnemy {
+        get { return m_enemy; }
+        set { 
+            m_enemy = value;
         }
     }
 
+    public ScoutTrackingEnemyState(PartyMember member) : base(member) { }
+
+    public override void FixedUpdate() {
+        if (TrackedEnemy == null) {
+            m_member.PopState ();
+            return;
+        }
+
+        m_member.MovementTarget = TrackedEnemy.transform.position;
+        if (m_member.HasReachedTarget()) {
+            m_member.PopState ();
+            return;
+        }
+        else {
+            m_member.MemberRigidbody.velocity = m_member.transform.forward * m_member.maxSpeed;
+        }
+    }
+}
+
+public class Scout : PartyMember {
     public override void ProcessInput() {
         if (Input.GetMouseButtonDown(1)) {
             Ray clickRay = m_camera.ScreenPointToRay(Input.mousePosition);
@@ -32,23 +38,12 @@ public class Scout : PartyMember {
             hits = Physics.RaycastAll(clickRay);
             for (int i = 0; i < hits.Length; ++i) {
                 if (hits[i].collider.tag == "Enemy") {
-                    m_target = hits[i].collider.GetComponent<Enemy>();
-                    SubState = ScoutState.TrackingEnemy;
+                    ScoutTrackingEnemyState newState = new ScoutTrackingEnemyState (this);
+                    newState.TrackedEnemy = hits [i].collider.GetComponent<Enemy> ();
+                    PushState (newState);
                     break;
                 }
             }
         }
     }
-
-    protected void OnTrackingEnemy() {
-        Vector3 targetVector = m_movementTarget - transform.position;
-        if (targetVector.magnitude > m_targetDistanceThreshold) {
-            m_rigidbody.velocity = transform.forward * maxSpeed;
-        }
-        else {
-            State = PartyMemberState.Idle;
-        }
-    }
-
-    
 }

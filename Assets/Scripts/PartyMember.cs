@@ -1,44 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public enum PartyMemberState {
-    Idle,
-    Walking
-}
+using System.Collections.Generic;
 
 public class PartyMember : MonoBehaviour {
-    protected delegate void UpdateBehaviour();
+    protected Camera m_camera;
+    Stack<PartyMemberState> m_states;
 
-    private UpdateBehaviour m_onUpdate;
-    protected UpdateBehaviour OnUpdate {
-        get { return m_onUpdate; }
-        set {
-            m_onUpdate = value;
-        }
-    }
+    public float maxSpeed = 1f;
+    public int meleeStrength = 1;
 
     Rigidbody m_rigidbody;
-    protected Camera m_camera;
-    float m_targetDistanceThreshold = 0.2f; // Minimum distance to target at which point we can say we've 'reached' it.
-
-    PartyMemberState m_state;
-    public PartyMemberState State {
-        get { return m_state; }
-        set {
-            if (value == PartyMemberState.Idle) {
-                m_rigidbody.velocity = Vector3.zero;
-                OnUpdate = OnIdleBehaviour;
-            }
-            else if (value == PartyMemberState.Walking) {
-                OnUpdate = OnWalkingBehaviour;
-            }
-
-            m_state = value;
-        }
+    public Rigidbody MemberRigidbody {
+        get { return m_rigidbody; }
     }
-    public float maxSpeed = 1f;
-
-    public int meleeStrength = 1;
 
     Vector3 m_movementTarget;
     public Vector3 MovementTarget {
@@ -47,40 +21,58 @@ public class PartyMember : MonoBehaviour {
             Vector3 direction = (value - transform.position).normalized;
             m_rigidbody.MoveRotation (Quaternion.FromToRotation (new Vector3 (0f, 0f, 1f), direction));
             m_movementTarget = value;
-            State = PartyMemberState.Walking;
         }
     }
 
     void Awake() {
+        m_states = new Stack<PartyMemberState> ();
         m_rigidbody = GetComponent<Rigidbody> ();
     }
 
     void Start () {
+        m_states.Clear ();
+        PushState (new PartyMemberStayInFormationState(this));
+
         m_camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         GetComponent<Damageable> ().onDead = OnDead;
     }
 
+    public void PushState(PartyMemberState state) {
+        if (m_states.Count > 0) {
+            m_states.Peek ().Exit ();
+        }
+        m_states.Push (state);
+        state.Enter ();
+    }
+
+    public PartyMemberState PeekState() { 
+        return m_states.Peek ();
+    }
+
+    public PartyMemberState PopState() { 
+        if (m_states.Count > 0) {
+            PartyMemberState popped = m_states.Pop ();
+            popped.Exit ();
+
+            if (m_states.Count > 0) {
+                m_states.Peek ().Enter ();
+            }
+            return popped;
+        }
+        else {
+            return null;
+        }
+    }
+   
     void OnDead() {
         FindObjectOfType<PartyController> ().OnPartyMemberDead (this);
         GameObject.Destroy (gameObject);
     }
 
-    protected void OnIdleBehaviour() { }
-
-    protected void OnWalkingBehaviour() {
-        Vector3 targetVector = m_movementTarget - transform.position;
-
-        if (targetVector.magnitude > m_targetDistanceThreshold) {
-            m_rigidbody.velocity = transform.forward * maxSpeed;
-        }
-        else {
-            State = PartyMemberState.Idle;
-        }
-    }
-
     void FixedUpdate() {
-        if (OnUpdate != null) {
-            OnUpdate();
+        ProcessInput ();
+        if (m_states.Count > 0) {
+            PeekState ().FixedUpdate ();
         }
     }
 
@@ -95,4 +87,12 @@ public class PartyMember : MonoBehaviour {
     }
 
     public virtual void ProcessInput() { }
+
+    public bool HasReachedLocation(Vector3 location) {
+        return (location - transform.position).magnitude <= GameConfig.TargetDistanceThreshold;
+    }
+
+    public bool HasReachedTarget() {
+        return HasReachedLocation (m_movementTarget);
+    }
 }

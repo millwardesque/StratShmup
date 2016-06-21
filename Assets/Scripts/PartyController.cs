@@ -52,8 +52,8 @@ public class PartyController : MonoBehaviour {
 
         if (m_selectedMember != null) {
             m_selectedMember.ProcessInput();
-    }
-
+        }
+            
         KeepInFormation ();
 	}
 
@@ -106,7 +106,10 @@ public class PartyController : MonoBehaviour {
             }
 
             formationSlots [bestSlot] = m_partyMembers [i];
-            m_partyMembers [i].MovementTarget = slots[bestSlot];
+
+            if (!m_partyMembers[i].HasReachedLocation (slots[bestSlot]) && m_partyMembers[i].PeekState().GetType () == typeof(PartyMemberStayInFormationState)) {
+                m_partyMembers [i].MovementTarget = slots[bestSlot];  
+            }
         }
     }
         

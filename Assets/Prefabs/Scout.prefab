@@ -28,7 +28,7 @@ GameObject:
   - 54: {fileID: 5482166}
   - 136: {fileID: 13636770}
   - 114: {fileID: 11409316}
-  - 114: {fileID: 11446228}
+  - 114: {fileID: 11465706}
   m_Layer: 9
   m_Name: Scout
   m_TagString: Player Party
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184964}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 1
---- !u!114 &11446228
+--- !u!114 &11465706
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -131,11 +131,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 184964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218a58e3ace364ac58dce339f88d1273, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b94ffcc8e9eeaf43ba26b48bf12935f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  meleeStrength: 3
+  meleeStrength: 2
 --- !u!136 &13636770
 CapsuleCollider:
   m_ObjectHideFlags: 1
