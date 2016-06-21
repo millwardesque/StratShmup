@@ -34,6 +34,7 @@ public class PartyController : MonoBehaviour {
                 }
             }
         }
+        
         else if (Input.GetMouseButton (0)) {
             Ray clickRay = m_camera.ScreenPointToRay (Input.mousePosition);
             RaycastHit[] hits;
@@ -48,6 +49,10 @@ public class PartyController : MonoBehaviour {
                 }
             }
         }
+
+        if (m_selectedMember != null) {
+            m_selectedMember.ProcessInput();
+    }
 
         KeepInFormation ();
 	}

@@ -185,6 +185,27 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3be5b72d0ea645d79db72fe6dc01aa1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &533671992 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 184964, guid: ab6865817317643a2802fcec2389a499, type: 2}
+  m_PrefabInternal: {fileID: 1634019262}
+--- !u!114 &533671993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533671992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b94ffcc8e9eeaf43ba26b48bf12935f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rigidbody: {fileID: 0}
+  m_targetDistanceThreshold: 0.2
+  m_state: 0
+  maxSpeed: 1
+  meleeStrength: 1
+  m_movementTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &538103593
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,6 +727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4fcd06941a24f819eac5ada02e09a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_partyMembers: []
+  m_camera: {fileID: 0}
+  m_selectedMember: {fileID: 0}
+  m_savedMaterial: {fileID: 0}
   selectedMaterial: {fileID: 2100000, guid: 8233f08325998481995623c2edf80739, type: 2}
   formationDistance: 2
 --- !u!4 &2070865680
